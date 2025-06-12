@@ -6,45 +6,68 @@ const ProductCard = ({ product, onAddToCart }) => {
     <div style={styles.card}>
       <img src={product.thumbnail} alt={product.title} style={styles.image} />
       <h3>{product.title}</h3>
-      <Link to={`/products/${product.id}`} style={styles.viewButton}>View</Link>
-      <button onClick={() => onAddToCart(product)} style={styles.cartButton}>Add to Cart</button>
+      <p style={styles.price}>${product.price}</p>
+      <p style={styles.shortDescription}>
+        {product.description.length > 60
+          ? product.description.slice(0, 60) + '...'
+          : product.description}
+      </p>
+
+      <div style={styles.buttons}>
+        <Link to={`/products/${product.id}`} style={styles.viewButton}>View</Link>
+        <button onClick={() => onAddToCart(product)} style={styles.cartButton}>Add to Cart</button>
+      </div>
+
     </div>
   );
 };
 
 const styles = {
   card: {
-    border: '1px solid #ccc',
+    width: '260px',
     padding: '16px',
-    width: '250px',
-    margin: '10px',
-    borderRadius: '10px',
-    boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-    textAlign: 'center'
+    margin: '12px',
+    border: '1px solid #ccc',
+    borderRadius: '12px',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+    textAlign: 'center',
+    backgroundColor: '#fff'
   },
   image: {
     width: '100%',
-    height: '150px',
+    height: '160px',
     objectFit: 'cover',
     borderRadius: '8px',
+    marginBottom: '10px'
+  },
+  price: {
+    color: '#28a745',
+    fontWeight: 'bold'
+  },
+  shortDescription: {
+    fontSize: '0.9rem',
+    color: '#555',
+    marginBottom: '10px'
+  },
+  buttons: {
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '8px',
+    marginTop: '10px'
   },
   viewButton: {
-    marginTop: '10px',
-    padding: '8px 16px',
     backgroundColor: '#007bff',
     color: '#fff',
-    textDecoration: 'none',
+    padding: '6px 12px',
     borderRadius: '5px',
-    display: 'inline-block',
-    marginRight: '10px'
+    textDecoration: 'none'
   },
   cartButton: {
-    padding: '8px 16px',
     backgroundColor: '#28a745',
     color: '#fff',
+    padding: '6px 12px',
     border: 'none',
-    borderRadius: '5px',
-    cursor: 'pointer'
+    borderRadius: '5px'
   }
 };
 
